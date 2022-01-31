@@ -1,0 +1,10 @@
+[build-system]
+requires = [
+    "setuptools>=42",
+    "wheel",
+    "pydash",
+    "pytruth",
+    "requests",
+    "loguru"
+]
+build-backend = "setuptools.build_meta"

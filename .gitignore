@@ -127,3 +127,11 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Dev environment
+Pipfile
+Pipfile.lock
+.editorconfig
+.vscode/
+.pylintrc
+.flake8
