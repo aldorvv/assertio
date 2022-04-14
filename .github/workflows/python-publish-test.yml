@@ -2,8 +2,8 @@ name: Upload Assertio to PyPi Test
 
 on:
   push:
-    branches:
-      - master
+    tags:
+      - '*'
 
 permissions:
   contents: read
