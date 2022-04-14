@@ -1,8 +1,9 @@
 name: Upload Assertio to PyPi Test
 
 on:
-  release:
-    types: [published]
+  push:
+    branches:
+      - master
 
 permissions:
   contents: read
