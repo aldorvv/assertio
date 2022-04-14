@@ -114,3 +114,21 @@ class Request:
     def equals(self, expected_value):
         """Assert target value is null."""
         AssertThat(self.target).IsEqualTo(expected_value)
+
+    @then
+    def contains(self, expected_value):
+        """Assert target value is null."""
+        try:
+            iter(self.target)
+        except TypeError as Err:
+            raise RuntimeError(f"{self.target} is not an iterable") from Err
+        AssertThat(self.target).Contains(expected_value)
+
+    @then
+    def does_not_contain(self, expected_value):
+        """Assert target value is null."""
+        try:
+            iter(self.target)
+        except TypeError as Err:
+            raise RuntimeError(f"{self.target} is not an iterable") from Err
+        AssertThat(self.target).DoesNotContain(expected_value)
