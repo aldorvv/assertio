@@ -1,34 +1,35 @@
-from os import getenv
-from http import HTTPStatus as HTTP
-
 from loguru import logger
 
-BASE_URL = getenv("ASSERTIO_BASE_URL", "http://127.0.0.1")
-LOGFILE = getenv("ASSERTIO_LOGFILE", "assertio.log")
+from . import config
 
-logger.add(LOGFILE, format="{level} | {message}")
+__defs = config.DEFAULTS
 
 
-def given(func):
+def given(fn):
     def wrapped_given(instance, *args, **kwargs):
-        func(instance, *args, **kwargs)
+        fn(instance, *args, **kwargs)
         return instance
+
     return wrapped_given
 
-def then(func):
+
+def then(fn):
     def wrapped_then(instance, *args, **kwargs):
-        info = f"{instance.method.upper()} {BASE_URL}{instance.endpoint}"
+        msg = f"{instance.method.upper()} {__defs.base_url}{instance.endpoint}"
         try:
-            func(instance, *args, **kwargs)
-            logger.success(f"{func.__name__} PASSED {info}")
+            fn(instance, *args, **kwargs)
+            logger.success(f"{fn.__name__} PASSED {msg}")
         except AssertionError:
-            logger.error(f"{func.__name__} FAILED: {info}")
+            logger.error(f"{fn.__name__} FAILED: {msg}")
         finally:
             return instance
+
     return wrapped_then
 
-def when(func):
+
+def when(fn):
     def wrapped_when(instance, *args, **kwargs):
-        func(instance, *args, **kwargs)
+        fn(instance, *args, **kwargs)
         return instance
+
     return wrapped_when
