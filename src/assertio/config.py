@@ -3,18 +3,20 @@ import os
 from inspect import getmembers, isroutine
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Union
 
 import json
 import yaml
 
 
-def _stat(filename: str) -> Union[Path, None]:
+def _stat(filename: str) -> Path:
     """Return a file if it exists."""
     file = Path.cwd().joinpath(filename)
     if file.exists():
         return file
-    return None
+    raise FileNotFoundError(
+        f"Assertio configuration file {filename} not found"
+    )
+
 
 @dataclass
 class Config:
