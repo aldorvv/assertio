@@ -3,17 +3,18 @@ import os
 from inspect import getmembers, isroutine
 from dataclasses import dataclass, field
 from pathlib import Path
+from typing import Union
 
 import json
 import yaml
 
 
-def _stat(filename: str) -> Path:
+def _stat(filename: str) -> Union[Path, None]:
     """Return a file if it exists."""
     file = Path.cwd().joinpath(filename)
     if file.exists():
         return file
-
+    return None
 
 @dataclass
 class Config:
