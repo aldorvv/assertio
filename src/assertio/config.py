@@ -13,10 +13,6 @@ def _stat(filename: str) -> Path:
     file = Path.cwd().joinpath(filename)
     if file.exists():
         return file
-    raise FileNotFoundError(
-        f"Assertio configuration file {filename} not found"
-    )
-
 
 @dataclass
 class Config:
