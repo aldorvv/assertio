@@ -1,4 +1,4 @@
-name: Upload Assertio to PyPi Test
+name: Upload Assertio to PyPi
 
 on:
   push:
