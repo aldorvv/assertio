@@ -1,10 +1,11 @@
 """Config functions."""
 import os
-from inspect import getmembers, isroutine
+import json
+
 from dataclasses import dataclass, field
+from inspect import getmembers, isroutine
 from pathlib import Path
 
-import json
 import yaml
 
 
@@ -19,9 +20,9 @@ class Config:
     """Configuration namespace."""
 
     base_url: str = field(default=os.getenv("ASSERTIO_BASE_URL", ""))
-    logfile: str = field(default=os.getenv("ASSERTIO_LOGFILE", ""))
+    logfile: str = field(default=os.getenv("ASSERTIO_LOGFILE", "assertio.log"))
 
-    def is_any_field_missing(self):
+    def is_any_field_missing(self) -> bool:
         """Return if any field is missing."""
         members = getmembers(self, lambda attr: not isroutine(attr))
         attrs = [attr[0] for attr in members if "_" not in attr[0]]

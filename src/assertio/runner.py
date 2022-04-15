@@ -1,4 +1,5 @@
 """Test runner module."""
+from .decorators import log_test
 
 
 class Runner:
@@ -9,4 +10,5 @@ class Runner:
 
         Tests function names must start with 'test'.
         """
-        [getattr(self, fn)(*args) for fn in dir(self) if fn.startswith("test")]
+        for fn in filter(lambda fn: fn.startswith("test"), dir(self)):
+            log_test(getattr(self, fn))(*args)
