@@ -1,12 +1,12 @@
 """Assertio request module."""
 from http import HTTPStatus as HTTP
+from typing import Dict, Union
 
 from pydash import _
 from requests import request
 from truth.truth import AssertThat
 
 from .decorators import given, then, when
-
 from . import config
 
 _defs = config.DEFAULTS
@@ -17,9 +17,9 @@ class Request:
 
     def __init__(self):
         """Class constructor."""
-        self.body = None
-        self.headers = None
-        self.params = None
+        self.body: Union[Dict, None] = None
+        self.headers: Union[Dict, None] = None
+        self.params: Union[Dict, None] = None
 
     @given
     def to(self, endpoint, **kwargs):
@@ -36,22 +36,31 @@ class Request:
     @given
     def with_body(self, body):
         """Set request Content-Type: appliaction/json body."""
-        self.body = body
+        if body is None:
+            self.body = body
+        else:
+            self.body.update(body)
 
     @given
     def with_headers(self, headers):
         """Set request header or headers."""
-        self.headers = headers
+        if headers is None:
+            self.headers = headers
+        else:
+            self.headers.update(headers)
 
     @given
     def with_params(self, params):
         """Set request query parameters."""
-        self.params = params
+        if params is None:
+            self.params = params
+        else:
+            self.params.update(params)
 
     @when
     def perform(self):
         """Execute request."""
-        self.request = request(
+        self.response = request(
             self.method,
             f"{_defs.base_url}{self.endpoint}",
             params=self.params,
@@ -62,28 +71,28 @@ class Request:
     @then
     def assert_http_ok(self):
         """Assert response status is 200 OK."""
-        AssertThat(self.request.status_code).IsEqualTo(HTTP.OK)
+        AssertThat(self.response.status_code).IsEqualTo(HTTP.OK)
 
     @then
     def assert_http_created(self):
         """Assert response status is 201 CREATED."""
-        AssertThat(self.request.status_code).IsEqualTo(HTTP.CREATED)
+        AssertThat(self.response.status_code).IsEqualTo(HTTP.CREATED)
 
     @then
     def assert_http_unauthorized(self):
         """Assert response status is 401 UNAUTHORIZED."""
-        AssertThat(self.request.status_code).IsEqualTo(HTTP.UNAUTHORIZED)
+        AssertThat(self.response.status_code).IsEqualTo(HTTP.UNAUTHORIZED)
 
     @then
     def assert_response_contains(self, expected_key):
         """Assert response body contains key."""
-        is_present = _.get(self.request.json(), expected_key)
+        is_present = _.get(self.response.json(), expected_key)
         AssertThat(is_present).IsTruthy()
 
     @then
     def assert_that_response_field(self, target_key):
         """Set a target value to assert any other condition."""
-        self.target = _.get(self.request.json(), target_key)
+        self.target = _.get(self.response.json(), target_key)
 
     @then
     def is_empty(self):
