@@ -7,7 +7,7 @@ from ..config import DEFAULTS
 from .base_request import BaseRequest
 
 
-class ActionRequest(BaseRequest):
+class Actions(BaseRequest):
     """Assertio Request object."""
 
     @when

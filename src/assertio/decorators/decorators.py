@@ -25,9 +25,9 @@ def then(fn):
         )
         try:
             fn(instance, *args, **kwargs)
-            logger.success(f"{fn.__name__} PASSED {msg}")
+            logger.success(f"PASSED {msg} {fn.__name__}")
         except AssertionError:
-            logger.error(f"{fn.__name__} FAILED: {msg}")
+            logger.error(f"FAILED: {msg} {fn.__name__}")
         finally:
             return instance
 

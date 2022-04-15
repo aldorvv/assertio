@@ -1,11 +1,11 @@
 """Aliases and exports."""
-from .action_request import ActionRequest
-from .precondition_request import PreconditionRequest
+from .action_request import Actions
+from .precondition_request import Preconditions
 from .assertions import BodyAssertions, StatusAssertions
 
 
 class __Request(
-    ActionRequest, BodyAssertions, PreconditionRequest, StatusAssertions
+    Actions, BodyAssertions, Preconditions, StatusAssertions
 ):
     ...
 

@@ -1,18 +1,10 @@
-"""Assertio request module."""
-from typing import Dict, Union
-
+"""Preconditions module."""
 from ..decorators import given
 from .base_request import BaseRequest
 
 
-class PreconditionRequest(BaseRequest):
-    """Assertio Request object."""
-
-    def __init__(self):
-        """Class constructor."""
-        self.body: Union[Dict, None] = None
-        self.headers: Union[Dict, None] = None
-        self.params: Union[Dict, None] = None
+class Preconditions(BaseRequest):
+    """Precondition methods."""
 
     @given
     def to(self, endpoint, **kwargs):
@@ -29,23 +21,14 @@ class PreconditionRequest(BaseRequest):
     @given
     def with_body(self, body):
         """Set request Content-Type: appliaction/json body."""
-        if self.body is None:
-            self.body = body
-        else:
-            self.body.update(body)
+        self.body = body
 
     @given
     def with_headers(self, headers):
         """Set request header or headers."""
-        if self.headers is None:
-            self.headers = headers
-        else:
-            self.headers.update(headers)
+        self.headers = headers
 
     @given
     def with_params(self, params):
         """Set request query parameters."""
-        if self.params is None:
-            self.params = params
-        else:
-            self.params.update(params)
+        self.params = params
