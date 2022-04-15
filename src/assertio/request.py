@@ -36,7 +36,7 @@ class Request:
     @given
     def with_body(self, body):
         """Set request Content-Type: appliaction/json body."""
-        if body is None:
+        if self.body is None:
             self.body = body
         else:
             self.body.update(body)
@@ -44,7 +44,7 @@ class Request:
     @given
     def with_headers(self, headers):
         """Set request header or headers."""
-        if headers is None:
+        if self.headers is None:
             self.headers = headers
         else:
             self.headers.update(headers)
@@ -52,7 +52,7 @@ class Request:
     @given
     def with_params(self, params):
         """Set request query parameters."""
-        if params is None:
+        if self.params is None:
             self.params = params
         else:
             self.params.update(params)
