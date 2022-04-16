@@ -1,4 +1,6 @@
 """Body assertions module."""
+from typing import Optional
+
 from ..base_request import BaseRequest
 from ...decorators import then
 
@@ -8,6 +10,13 @@ from pydash import _
 
 class BodyAssertions(BaseRequest):
     """Content-Type: Application/json responses assertions."""
+
+    def __init__(
+        self,
+        method: Optional[str] = None,
+        endpoint: Optional[str] = None
+    ):
+        super().__init__(method, endpoint)
 
     @then
     def assert_response_contains(self, expected_key):
