@@ -1,5 +1,6 @@
 """HTTP status module."""
 from http import HTTPStatus as HTTP
+from typing import Optional
 
 from truth.truth import AssertThat
 
@@ -9,6 +10,13 @@ from ..base_request import BaseRequest
 
 class StatusAssertions(BaseRequest):
     """HTTP status assertions."""
+
+    def __init__(
+        self,
+        method: Optional[str] = None,
+        endpoint: Optional[str] = None
+    ):
+        super().__init__(method, endpoint)
 
     @then
     def assert_http_continue(self):

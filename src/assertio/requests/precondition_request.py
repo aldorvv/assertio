@@ -1,10 +1,19 @@
 """Preconditions module."""
+from typing import Optional
+
 from ..decorators import given
 from .base_request import BaseRequest
 
 
 class Preconditions(BaseRequest):
     """Precondition methods."""
+
+    def __init__(
+        self,
+        method: Optional[str] = None,
+        endpoint: Optional[str] = None
+    ):
+        super().__init__(method, endpoint)
 
     @given
     def to(self, endpoint, **kwargs):

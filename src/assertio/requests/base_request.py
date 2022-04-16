@@ -1,15 +1,19 @@
-from typing import Dict, Union
+from typing import Dict, Optional, Union
 
 
 class BaseRequest:
     """Assertio Request object."""
 
-    def __init__(self):
+    def __init__(
+        self,
+        method: Optional[str] = None,
+        endpoint: Optional[str] = None
+    ):
         """Class constructor."""
         self._body: Union[Dict, None] = None
-        self._endpoint: Union[str, None] = None
+        self._endpoint: Union[str, None] = endpoint
         self._headers: Union[Dict, None] = None
-        self._method: Union[str, None] = None
+        self._method: Union[str, None] = method
         self._params: Union[Dict, None] = None
 
     @property
