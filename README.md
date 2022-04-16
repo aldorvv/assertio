@@ -59,7 +59,7 @@ your custom assertions and preconditions.
 
 You can chain as many assertions and preconditions as you want, just remember
 to keep it simple, if your request chain is 15 lines long, maybe it's time
-to consider to split it in more tets.
+to consider to split it in smaller tests.
 
 Anyway, let's take a look to a more complex example using a POST to a custom
 API.
@@ -67,7 +67,7 @@ API.
 Remember to change the `ASSERTIO_BASE_URL` environment variable
 
 ```bash
-$ export ASSERTIO_BASE_URL=http://myapi-domain/api/v1
+$ export ASSERTIO_BASE_URL=http://my-books-api-domain/api/v1
 ```
 
 And let's try to add a new resource.
