@@ -30,6 +30,11 @@ class BaseRequest:
         """Endpoint getter, no setter available."""
         return self._endpoint
 
+    @endpoint.setter
+    def endpoint(self, new_endpoint):
+        """Endpoint setter."""
+        self._endpoint = new_endpoint
+
     @property
     def headers(self):
         """Headers getter."""
@@ -45,10 +50,12 @@ class BaseRequest:
 
     @property
     def method(self):
+        """Method getter."""
         return self._method
-    
+
     @method.setter
     def method(self, new_method):
+        """Method setter."""
         self._method = new_method
 
     @property
