@@ -1,7 +1,9 @@
 import json
 
 from pathlib import Path
-from typing import Dict, Optional, Union
+from typing import Dict, List, Optional, Union
+
+from pydash import _
 
 from ..config import DEFAULTS
 
@@ -77,3 +79,10 @@ class BaseRequest:
             self._params = new_params
         else:
             self._params.update(new_params)
+
+    def get_response_field(self, path: Union[str, List[str]]):
+        """Return value from response payload.
+        Must be used after perform()
+        
+        """
+        return _.get(self.response.json(), path)
