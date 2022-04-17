@@ -11,12 +11,8 @@ from pydash import _
 class BodyAssertions(BaseRequest):
     """Content-Type: Application/json responses assertions."""
 
-    def __init__(
-        self,
-        method: Optional[str] = None,
-        endpoint: Optional[str] = None
-    ):
-        super().__init__(method, endpoint)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     @then
     def assert_response_contains(self, expected_key):

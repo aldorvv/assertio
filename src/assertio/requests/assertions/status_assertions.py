@@ -11,12 +11,8 @@ from ..base_request import BaseRequest
 class StatusAssertions(BaseRequest):
     """HTTP status assertions."""
 
-    def __init__(
-        self,
-        method: Optional[str] = None,
-        endpoint: Optional[str] = None
-    ):
-        super().__init__(method, endpoint)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     @then
     def assert_http_continue(self):

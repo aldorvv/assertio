@@ -10,13 +10,8 @@ from pydash import _
 
 class HeadersAssertions(BaseRequest):
 
-    def __init__(
-        self,
-        method: Optional[str] = None,
-        endpoint: Optional[str] = None
-    ):
-        super().__init__(method, endpoint)
-        self._header_target = None
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     @then
     def assert_response_headers_contains(self, key: str):

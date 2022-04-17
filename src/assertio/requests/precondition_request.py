@@ -8,12 +8,8 @@ from .base_request import BaseRequest
 class Preconditions(BaseRequest):
     """Precondition methods."""
 
-    def __init__(
-        self,
-        method: Optional[str] = None,
-        endpoint: Optional[str] = None
-    ):
-        super().__init__(method, endpoint)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     @given
     def to(self, endpoint, **kwargs):
