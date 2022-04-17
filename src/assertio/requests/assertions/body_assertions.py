@@ -64,3 +64,13 @@ class BodyAssertions(BaseRequest):
     def does_not_contain(self, expected_value):
         """Assert target value is null."""
         AssertThat(self.target).DoesNotContain(expected_value)
+
+    @then
+    def is_equal_to_request_payload_field(self, key: str):
+        """Asserts target value equals to Request().body key."""
+        AssertThat(self.target).IsEqualTo(self.body.get(key))
+
+    @then
+    def is_not_equal_to_request_payload_field(self, key: str):
+        """Asserts target value is not equal to Request().body key."""
+        AssertThat(self.target).IsNotEqualTo(self.body.get(key))
