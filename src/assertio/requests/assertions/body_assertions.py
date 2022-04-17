@@ -21,7 +21,7 @@ class BodyAssertions(BaseRequest):
         AssertThat(is_present).IsTruthy()
 
     @then
-    def assert_that_response_field(self, target_key):
+    def assert_response_field(self, target_key):
         """Set a target value to assert any other condition."""
         self.target = _.get(self.response.json(), target_key)
 

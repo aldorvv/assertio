@@ -22,7 +22,7 @@ class HeadersAssertions(BaseRequest):
         AssertThat(self.response.headers).Contains(key)
 
     @then
-    def assert_that_response_header(self, key: str):
+    def assert_response_header(self, key: str):
         self._target = self.response.headers.get(key)
 
     @then

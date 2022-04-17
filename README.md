@@ -26,7 +26,7 @@ class MyRunner(Runner):
             .with_method("GET")\
             .perform()\
             .assert_http_ok()\
-            .assert_that_response_field("name")\
+            .assert_response_field("name")\
             .equals("pikachu")
 
 MyRunner().start()
@@ -99,7 +99,7 @@ class MyRunner(Runner):
             .with_body(BOOK_PAYLOAD)\
             .perform()\
             .assert_http_created()\
-            .assert_that_response_field("author.nationality")\
+            .assert_response_field("author.nationality")\
             .equals("Italian")
 
 MyRunner().start()
