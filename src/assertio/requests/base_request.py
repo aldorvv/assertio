@@ -19,6 +19,8 @@ class BaseRequest:
     @property
     def body(self):
         """Body getter."""
+        if isinstance(self._body, str):
+            return json.loads(self._body)
         return self._body
     
     @body.setter

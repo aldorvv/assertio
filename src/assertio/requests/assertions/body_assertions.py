@@ -68,9 +68,9 @@ class BodyAssertions(BaseRequest):
     @then
     def is_equal_to_request_payload_field(self, key: str):
         """Asserts target value equals to Request().body key."""
-        AssertThat(self.target).IsEqualTo(self.body.get(key))
+        AssertThat(self.target).IsEqualTo(_.get(self.body, key))
 
     @then
     def is_not_equal_to_request_payload_field(self, key: str):
         """Asserts target value is not equal to Request().body key."""
-        AssertThat(self.target).IsNotEqualTo(self.body.get(key))
+        AssertThat(self.target).IsNotEqualTo(_.get(self.body, key))

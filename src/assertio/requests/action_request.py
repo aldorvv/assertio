@@ -1,6 +1,6 @@
 """Assertio request module."""
+from json import dumps
 from requests import request
-from typing import Optional
 
 from ..decorators import when
 from ..config import DEFAULTS
@@ -20,6 +20,6 @@ class Actions(BaseRequest):
             self.method,
             f"{DEFAULTS.base_url}{self.endpoint}",
             params=self.params,
-            data=self.body,
+            data=dumps(self.body),
             headers=self.headers,
         )
