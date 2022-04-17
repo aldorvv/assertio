@@ -1,5 +1,5 @@
 """Preconditions module."""
-from typing import Optional
+from typing import Dict, Union
 
 from ..decorators import given
 from .base_request import BaseRequest
@@ -24,7 +24,7 @@ class Preconditions(BaseRequest):
         self.method = method
 
     @given
-    def with_body(self, body):
+    def with_body(self, body: Union[Dict, str]):
         """Set request Content-Type: appliaction/json body."""
         self.body = body
 

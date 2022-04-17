@@ -21,6 +21,7 @@ class Config:
 
     base_url: str = field(default=os.getenv("ASSERTIO_BASE_URL", ""))
     logfile: str = field(default=os.getenv("ASSERTIO_LOGFILE", "assertio.log"))
+    payloads_dir: str = field(default=os.getenv("ASSERTIO_LOGFILE", "features/payloads"))
 
     def is_any_field_missing(self) -> bool:
         """Return if any field is missing."""

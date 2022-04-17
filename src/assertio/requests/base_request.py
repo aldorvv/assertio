@@ -1,5 +1,9 @@
+import json
+
+from pathlib import Path
 from typing import Dict, Optional, Union
 
+from ..config import DEFAULTS
 
 class BaseRequest:
     """Assertio Request object."""
@@ -18,12 +22,15 @@ class BaseRequest:
         return self._body
     
     @body.setter
-    def body(self, new_body):
+    def body(self, body: Union[Dict, str]):
         """Body setter."""
-        if self._body is None:
-            self._body = new_body
-        else:
-            self._body.update(new_body)
+        if isinstance(body, str):
+            body = Path.cwd().joinpath(f"{DEFAULTS.payloads_dir}/{body}")
+        if isinstance(body, Path):
+            with open(body) as stream:
+                body = json.load(stream)
+
+        self._body = json.dumps(body)
 
     @property
     def endpoint(self):
