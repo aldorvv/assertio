@@ -5,7 +5,10 @@ from typing import Dict, List, Optional, Union
 
 from pydash import _
 
-from ..config import DEFAULTS
+from ..bootstrap import _CLI
+
+
+DEFAULTS = _CLI().get_config()
 
 class BaseRequest:
     """Assertio Request object."""

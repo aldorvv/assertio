@@ -1,8 +1,10 @@
 """Decorators module."""
 from loguru import logger
 
-from ..config import DEFAULTS
+from ..bootstrap import _CLI
 
+
+DEFAULTS = _CLI().get_config()
 logger.add(DEFAULTS.logfile, format="{time} | {level} | {message}")
 
 

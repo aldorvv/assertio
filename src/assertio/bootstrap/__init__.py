@@ -1,4 +1,4 @@
 from .bootstrap import _CLI
 
 def main():
-    _CLI().bootstrap
+    _CLI().bootstrap()

@@ -3,9 +3,11 @@ from json import dumps
 from requests import request
 
 from ..decorators import when
-from ..config import DEFAULTS
+from ..bootstrap import _CLI
 from .base_request import BaseRequest
 
+
+DEFAULTS = _CLI().get_config()
 
 class Actions(BaseRequest):
     """Assertio Request object."""
