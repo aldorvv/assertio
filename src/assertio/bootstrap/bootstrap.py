@@ -2,15 +2,11 @@ from argparse import ArgumentParser
 from pathlib import Path
 from pydoc import importfile
 
+from .config import Config
+
 
 JSON_NAME = "assertio.json"
 YAML_NAME = "assertio.yaml"
-
-def _stat(filename: str) -> Path:
-    """Return a file if it exists."""
-    file = Path.cwd().joinpath(filename)
-    if file.exists():
-        return file
 
 
 class _CLI:
@@ -51,10 +47,21 @@ class _CLI:
                 if self._args.run == runner.__name__:
                     runner().start()
 
+    def get_config(self) -> Config:
+        _ = Config()
+        if self._args.settings is None:
+            _.from_json(JSON_NAME)
+            _.from_yaml(YAML_NAME)
+        elif self._args.settings.endswith("json"):
+            _.from_json(self._args.settings)
+        elif self._args.settings.endswith("yaml"):
+            _.from_yaml(self._args.settings)
+        
+        return _
+
+
     def bootstrap(self):
         if self._args.run == "all":
             self.run_all()
         else:
             self.run_one()
-
-_CLI().bootstrap()
