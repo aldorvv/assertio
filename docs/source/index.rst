@@ -8,8 +8,9 @@ Welcome to assertio's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
+   install
+   basic_usage
 
 
 Indices and tables
