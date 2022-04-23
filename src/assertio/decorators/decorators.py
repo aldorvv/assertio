@@ -1,4 +1,6 @@
 """Decorators module."""
+from functools import wraps
+
 from loguru import logger
 
 from ..bootstrap import _CLI
@@ -53,3 +55,16 @@ def log_test(fn):
         fn(*args, **kwargs)
 
     return _
+
+
+def weight(value: int):
+    """Add a function a weight attr."""
+    def attr_decorator(fn):
+        @wraps(fn)
+        def _(*args, **kwargs):
+            return fn(*args, **kwargs)
+
+        setattr(_, "weight", value)
+        return _
+
+    return attr_decorator

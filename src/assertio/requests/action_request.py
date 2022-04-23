@@ -21,6 +21,7 @@ class Actions(BaseRequest):
         self.response = request(
             self.method,
             f"{DEFAULTS.base_url}{self.endpoint}",
+            cookies=self.cookies,
             params=self.params,
             data=dumps(self.body),
             headers=self.headers,

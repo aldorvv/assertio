@@ -1,5 +1,5 @@
 """Aliases and exports."""
-from .decorators import given, then, when, log_test
+from .decorators import given, log_test, then, when, weight
 
 
 Given, Then, When = given, then, when
