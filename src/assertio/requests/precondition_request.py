@@ -102,8 +102,8 @@ class Preconditions(BaseRequest):
         .perform()
 
         """
-        if "Bearer: " not in token:
-            token = f"Bearer: {token}"
+        if "Bearer " not in token:
+            token = f"Bearer {token}"
         self.with_header("Authorization", token)
 
     @given
