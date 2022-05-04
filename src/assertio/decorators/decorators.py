@@ -78,4 +78,5 @@ def timeit(fn):
         fn(*args, **kwargs)
         elapsed = time() - starting
         logger.info(f"ELAPSED TIME: {elapsed}")
+        setattr(_, __name__, fn.__name__)
     return _
