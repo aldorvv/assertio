@@ -49,7 +49,7 @@ class Preconditions(BaseRequest):
         .with_header("Authorization=Bearer <token>")
 
         """
-        if self.headers is not None:
+        if self.headers is None:
             self.headers = {}
 
         if len(args) == 1:
@@ -80,7 +80,7 @@ class Preconditions(BaseRequest):
         .with_cookie("X-CustomCookie=value")
 
         """
-        if self.cookies is not None:
+        if self.cookies is None:
             self.cookies = {}
 
         if len(args) == 1:

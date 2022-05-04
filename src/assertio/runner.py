@@ -1,6 +1,6 @@
 """Test runner module."""
 from .decorators import log_test
-from .types import MethodsList
+from .types import MethodList, TestMethod, TestMethods
 
 class Runner:
     """Test runner."""
@@ -16,15 +16,18 @@ class Runner:
         for fn in with_weight:
             log_test(fn)(*args)
 
-    def __get_tests(self) -> MethodsList:
+    def __get_tests(self) -> TestMethods:
         """Get each runner test methods."""
         names = filter(lambda fn: fn.startswith("test"), dir(self))
-        return [getattr(self, fn) for fn in names]
+        methods: TestMethods = []
+        for name in names:
+            fn = getattr(self, name)
+            weight = getattr(self, "weight", 0)
+            methods.append(TestMethod(fn, weight))
+        return methods
 
-    def __sort_by_weight(self, methods: MethodsList) -> MethodsList:
+    def __sort_by_weight(self, methods: TestMethods) -> MethodList:
         """Sort methods based on it's weight."""
-        for method in methods:
-            if not hasattr(method, "weight"):
-                setattr(method, "weight", 0)
-        return sorted(methods, key=lambda fn: fn.weight, reverse=True)
+        sorted_ = sorted(methods, key=lambda test: test.weight, reverse=True)
+        return [test.function for test in sorted_]
 
