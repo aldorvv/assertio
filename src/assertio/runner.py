@@ -22,7 +22,7 @@ class Runner:
         methods: TestMethods = []
         for name in names:
             fn = getattr(self, name)
-            weight = getattr(self, "weight", 0)
+            weight = getattr(fn, "weight", 0)
             methods.append(TestMethod(fn, weight))
         return methods
 
