@@ -1,5 +1,6 @@
 """Decorators module."""
 from functools import wraps
+from time import time
 
 from loguru import logger
 
@@ -68,3 +69,13 @@ def weight(value: int):
         return _
 
     return attr_decorator
+
+
+def timeit(fn):
+    """Add a simple temporizer to function."""
+    def _(*args, **kwargs):
+        starting = time()
+        fn(*args, **kwargs)
+        elapsed = time() - starting
+        logger.info(f"ELAPSED TIME: {elapsed}")
+    return _
