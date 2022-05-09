@@ -31,11 +31,10 @@ def then(fn):
         try:
             fn(instance, *args, **kwargs)
             logger.success(f"PASSED {msg} {fn.__name__}")
-        except AssertionError as error:
-            logger.error(f"FAILED: {msg} {fn.__name__}")
-            raise error
-        finally:
             return instance
+        except AssertionError as err:
+            logger.error(f"FAILED: {msg} {fn.__name__} {err}")
+            raise err
     setattr(_, "__name__", fn.__name__)
     return _
 
