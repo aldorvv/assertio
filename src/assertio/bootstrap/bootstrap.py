@@ -21,7 +21,7 @@ class _CLI:
             "-s",
             default=None
         )
-        self._flags, unknown = flags.parse_known_args()
+        self._flags, _ = flags.parse_known_args()
 
     def load_modules(self):
         modules = []
@@ -61,7 +61,7 @@ class _CLI:
 
 
     def bootstrap(self):
-        if self._args.run == "all":
+        if self._flags.run == "all":
             self.run_all()
         else:
             self.run_one()
