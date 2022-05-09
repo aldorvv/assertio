@@ -11,17 +11,17 @@ YAML_NAME = "assertio.yaml"
 
 class _CLI:
     def __init__(self):
-        _ = ArgumentParser()
-        _.add_argument(
+        flags = ArgumentParser()
+        flags.add_argument(
             "--run",
             default="all",
         )
-        _.add_argument(
+        flags.add_argument(
             "--settings",
             "-s",
             default=None
         )
-        self._args = _.parse_args()
+        self._flags, unknown = flags.parse_known_args()
 
     def load_modules(self):
         modules = []
@@ -44,18 +44,18 @@ class _CLI:
     def run_one(self):
         for module in self.load_modules():
             for runner in self.get_runners_for(module):
-                if self._args.run == runner.__name__:
+                if self._flags.run == runner.__name__:
                     runner().start()
 
     def get_config(self) -> Config:
         _ = Config()
-        if self._args.settings is None:
+        if self._flags.settings is None:
             _.from_json(JSON_NAME)
             _.from_yaml(YAML_NAME)
-        elif self._args.settings.endswith("json"):
-            _.from_json(self._args.settings)
-        elif self._args.settings.endswith("yaml"):
-            _.from_yaml(self._args.settings)
+        elif self._flags.settings.endswith("json"):
+            _.from_json(self._flags.settings)
+        elif self._flags.settings.endswith("yaml"):
+            _.from_yaml(self._flags.settings)
         
         return _
 

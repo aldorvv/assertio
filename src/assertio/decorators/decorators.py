@@ -17,7 +17,7 @@ def given(fn):
     def _(instance, *args, **kwargs):
         fn(instance, *args, **kwargs)
         return instance
-
+    setattr(_, "__name__", fn.__name__)
     return _
 
 
@@ -35,7 +35,7 @@ def then(fn):
             logger.error(f"FAILED: {msg} {fn.__name__}")
         finally:
             return instance
-
+    setattr(_, "__name__", fn.__name__)
     return _
 
 
@@ -45,7 +45,7 @@ def when(fn):
     def _(instance, *args, **kwargs):
         fn(instance, *args, **kwargs)
         return instance
-
+    setattr(_, "__name__", fn.__name__)
     return _
 
 
@@ -54,7 +54,7 @@ def log_test(fn):
     def _(*args, **kwargs):
         logger.info(f"{fn.__name__} started")
         fn(*args, **kwargs)
-
+    setattr(_, "__name__", fn.__name__)
     return _
 
 
@@ -75,8 +75,9 @@ def timeit(fn):
     """Add a simple temporizer to function."""
     def _(*args, **kwargs):
         starting = time()
-        fn(*args, **kwargs)
+        request = fn(*args, **kwargs)
         elapsed = time() - starting
         logger.info(f"ELAPSED TIME: {elapsed}")
+        return request
     setattr(_, "__name__", fn.__name__)
     return _
